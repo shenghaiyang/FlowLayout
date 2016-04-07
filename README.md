@@ -7,12 +7,12 @@ FlowLayout是android的一个流式布局.
 - gradle中引入依赖
 
 ```xml
-compile 'com.shenghaiyang.flowlayout:flowlayout:1.0.0'
+compile 'com.shenghaiyang.flowlayout:flowlayout:1.1.0'
 ```
 
 - 在布局文件中使用（详细请查看samples）
 
-![](image/screenshot01.png)
+![](image/screenshot02.png)
 
 ## Contact me
 

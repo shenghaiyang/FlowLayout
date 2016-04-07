@@ -15,19 +15,20 @@
  */
 package com.shenghaiyang.flowlayout;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
-public class FlowLayout extends FrameLayout {
+public class FlowLayout extends ViewGroup {
 
     private class ChildHelper {
-        //child view
         View child;
-        //child view position, relative to parent
         int l, t, r, b;
 
         public ChildHelper(View child, int l, int t, int r, int b) {
@@ -39,23 +40,28 @@ public class FlowLayout extends FrameLayout {
         }
     }
 
-    private LinkedList<ChildHelper> children = new LinkedList<>();
+    private List<ChildHelper> helpers = new ArrayList<>();
 
     public FlowLayout(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public FlowLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        helpers.clear();
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
@@ -93,7 +99,7 @@ public class FlowLayout extends FrameLayout {
                 lineWidth += childWidth;
                 lineHeight = Math.max(lineHeight, childHeight);
             }
-            children.addLast(helper);
+            helpers.add(helper);
         }
         setMeasuredDimension((widthMode == MeasureSpec.EXACTLY ? widthSize : width),
                 (heightMode == MeasureSpec.EXACTLY ? heightSize : height));
@@ -101,15 +107,25 @@ public class FlowLayout extends FrameLayout {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        int size = children.size();
+        int size = helpers.size();
         for (int i = 0; i < size; i++) {
-            ChildHelper helper = children.removeFirst();
+            ChildHelper helper = helpers.get(i);
             helper.child.layout(helper.l, helper.t, helper.r, helper.b);
         }
     }
 
     @Override
-    public void addView(View child) {
-        super.addView(child);
+    protected LayoutParams generateLayoutParams(LayoutParams p) {
+        return new MarginLayoutParams(p);
+    }
+
+    @Override
+    public LayoutParams generateLayoutParams(AttributeSet attrs) {
+        return new MarginLayoutParams(getContext(), attrs);
+    }
+
+    @Override
+    protected LayoutParams generateDefaultLayoutParams() {
+        return new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
     }
 }
