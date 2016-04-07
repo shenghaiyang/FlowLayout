@@ -12,7 +12,7 @@ compile 'com.shenghaiyang.flowlayout:flowlayout:1.0.0'
 
 2. 在布局文件中使用（详细请查看samples）
 
-![sample](image/screenshot01.png =216x384)
+![](image/screenshot01.png)
 
 ## Contact me
 
