@@ -16,7 +16,7 @@ compile 'com.shenghaiyang.flowlayout:flowlayout:1.1.0'
 
 ## Contact me
 
-如果在使用中有什么问题，请联系我[shenghaiyang@live.cn](shenghaiyang@live.cn)。
+如果在使用中有什么问题，请联系我[shenghaiyang@live.cn](mailto:shenghaiyang@live.cn)。
 
 ## License
 
