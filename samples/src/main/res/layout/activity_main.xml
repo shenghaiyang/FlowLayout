@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.shenghaiyang.flowlayout.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.shenghaiyang.samples.flowlayout.MainActivity">
+
+    <TextView
+        style="@style/tag"
+        android:text="伪文青" />
+
+    <TextView
+        style="@style/tag"
+        android:text="技术宅" />
+
+    <TextView
+        style="@style/tag"
+        android:text="大叔" />
+
+    <TextView
+        style="@style/tag"
+        android:text="失足老年人" />
+
+    <TextView
+        style="@style/tag"
+        android:text="二次元" />
+
+    <TextView
+        style="@style/tag"
+        android:text="大叔" />
+
+    <TextView
+        style="@style/tag"
+        android:text="萝莉" />
+
+    <TextView
+        style="@style/tag"
+        android:text="御姐" />
+
+    <TextView
+        style="@style/tag"
+        android:text="喵~" />
+
+    <TextView
+        style="@style/tag"
+        android:text="咆哮哥" />
+
+    <TextView
+        style="@style/tag"
+        android:text="强迫症" />
+
+    <TextView
+        style="@style/tag"
+        android:text="处女座" />
+
+    <TextView
+        style="@style/tag"
+        android:text="O(∩_∩)O哈哈~" />
+
+</com.shenghaiyang.flowlayout.FlowLayout>
