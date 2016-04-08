@@ -27,20 +27,7 @@ import java.util.List;
 
 public class FlowLayout extends ViewGroup {
 
-    private class ChildHelper {
-        View child;
-        int l, t, r, b;
-
-        public ChildHelper(View child, int l, int t, int r, int b) {
-            this.child = child;
-            this.l = l;
-            this.t = t;
-            this.r = r;
-            this.b = b;
-        }
-    }
-
-    private List<ChildHelper> helpers = new ArrayList<>();
+    private List<Holder> holders = new ArrayList<>();
 
     public FlowLayout(Context context) {
         this(context, null);
@@ -61,15 +48,15 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        helpers.clear();
+        holders.clear();
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        //max width/height
+        //count height and max width
         int width = 0;
         int height = 0;
-        //line max width/height
+        //count line width and height
         int lineWidth = 0;
         int lineHeight = 0;
         int count = getChildCount();
@@ -79,10 +66,10 @@ public class FlowLayout extends ViewGroup {
             MarginLayoutParams params = (MarginLayoutParams) child.getLayoutParams();
             int childWidth = child.getMeasuredWidth() + params.leftMargin + params.rightMargin;
             int childHeight = child.getMeasuredHeight() + params.topMargin + params.bottomMargin;
-            ChildHelper helper;
+            Holder holder;
             if (lineWidth + childWidth > widthSize) {
                 height += lineHeight;
-                helper = new ChildHelper(child,
+                holder = new Holder(child,
                         params.leftMargin,
                         params.topMargin + height,
                         params.leftMargin + child.getMeasuredWidth(),
@@ -91,7 +78,7 @@ public class FlowLayout extends ViewGroup {
                 lineHeight = childHeight;
                 width = Math.max(lineWidth, childWidth);
             } else {
-                helper = new ChildHelper(child,
+                holder = new Holder(child,
                         lineWidth + params.leftMargin,
                         height + params.topMargin,
                         lineWidth + params.leftMargin + child.getMeasuredWidth(),
@@ -99,7 +86,7 @@ public class FlowLayout extends ViewGroup {
                 lineWidth += childWidth;
                 lineHeight = Math.max(lineHeight, childHeight);
             }
-            helpers.add(helper);
+            holders.add(holder);
         }
         setMeasuredDimension((widthMode == MeasureSpec.EXACTLY ? widthSize : width),
                 (heightMode == MeasureSpec.EXACTLY ? heightSize : height));
@@ -107,10 +94,8 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        int size = helpers.size();
-        for (int i = 0; i < size; i++) {
-            ChildHelper helper = helpers.get(i);
-            helper.child.layout(helper.l, helper.t, helper.r, helper.b);
+        for (Holder holder : holders) {
+            holder.child.layout(holder.l, holder.t, holder.r, holder.b);
         }
     }
 
@@ -127,5 +112,18 @@ public class FlowLayout extends ViewGroup {
     @Override
     protected LayoutParams generateDefaultLayoutParams() {
         return new MarginLayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+    }
+
+    private class Holder {
+        final View child;
+        final int l, t, r, b;
+
+        public Holder(View child, int l, int t, int r, int b) {
+            this.child = child;
+            this.l = l;
+            this.t = t;
+            this.r = r;
+            this.b = b;
+        }
     }
 }
