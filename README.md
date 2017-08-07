@@ -1,6 +1,6 @@
 # FlowLayout
 
-[![travis-ci](https://travis-ci.org/shenghaiyang/FlowLayout)](https://travis-ci.org/shenghaiyang/FlowLayout.svg?branch=master)
+[![Build Status](https://travis-ci.org/shenghaiyang/FlowLayout.svg?branch=master)](https://travis-ci.org/shenghaiyang/FlowLayout)
 
 FlowLayout是android的一个流式布局.
 
@@ -15,10 +15,6 @@ compile 'com.shenghaiyang.flowlayout:flowlayout:1.1.0'
 - 在布局文件中使用（详细请查看samples）
 
 ![](image/screenshot02.png)
-
-## Contact me
-
-如果在使用中有什么问题，请联系我[shenghaiyang@live.cn](mailto:shenghaiyang@live.cn)。
 
 ## License
 
