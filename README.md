@@ -1,12 +1,14 @@
 # FlowLayout
 
+[![travis-ci](https://travis-ci.org/shenghaiyang/FlowLayout)](https://travis-ci.org/shenghaiyang/FlowLayout.svg?branch=master)
+
 FlowLayout是android的一个流式布局.
 
 ## Usage
 
 - gradle中引入依赖
 
-```xml
+```groovy
 compile 'com.shenghaiyang.flowlayout:flowlayout:1.1.0'
 ```
 
