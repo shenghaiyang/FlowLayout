@@ -1,3 +1,7 @@
+# Deprecated
+
+[flexbox-layout](https://github.com/google/flexbox-layout) is better.
+
 # FlowLayout
 
 [![Build Status](https://travis-ci.org/shenghaiyang/FlowLayout.svg?branch=master)](https://travis-ci.org/shenghaiyang/FlowLayout)
